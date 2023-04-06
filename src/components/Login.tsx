@@ -1,7 +1,13 @@
 import { SyntheticEvent, useState } from "react";
 import { User } from "../models/user";
+import { Navigate } from "react-router-dom";
 
-export default function Login() {
+interface ILoginProps{
+    currentUser: User | undefined,
+    setCurrentUser: (nextUser: User) => void
+}
+
+export default function Login(props:ILoginProps) {
 
     const [principal, setPrincipal] = useState<User>();
     const [username, setUsername] = useState('');
@@ -32,7 +38,7 @@ export default function Login() {
                 });
 
                 if(response.status === 201){
-                    setPrincipal(await response.json());
+                    props.setCurrentUser(await response.json());
 
                 } else if(response.status === 401){
                     setErrorMessage('Invalid username and/or password');
@@ -53,9 +59,9 @@ export default function Login() {
     }
 
     return (
-        principal ?
+        props.currentUser ?
         <>
-            Hello {principal.username} token: {principal.token}. You're id is {principal.user_id}, and you're a {principal.account_type}
+            <Navigate to="/" />
         </>
         :
     <>
