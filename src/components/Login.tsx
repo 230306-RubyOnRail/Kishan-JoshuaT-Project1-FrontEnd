@@ -2,14 +2,14 @@ import { SyntheticEvent, useState } from "react";
 import { User } from "../models/user";
 import { Navigate } from "react-router-dom";
 
-interface ILoginProps{
+interface ILoginProps {
     currentUser: User | undefined,
     setCurrentUser: (nextUser: User) => void
 }
 
-export default function Login(props:ILoginProps) {
+export default function Login(props: ILoginProps) {
 
-    const [principal, setPrincipal] = useState<User>();
+    // const [principal, setPrincipal] = useState<User>();
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [errorMessage, setErrorMessage] = useState('');
@@ -24,7 +24,7 @@ export default function Login(props:ILoginProps) {
 
     let login = async (e: SyntheticEvent) => {
         console.log(`username: ${username} and password: ${password}`);
-        if(username && password){
+        if (username && password) {
             setErrorMessage('');
             console.log(`username: ${username} and password: ${password}`);
 
@@ -32,15 +32,15 @@ export default function Login(props:ILoginProps) {
                 let response = await fetch('http://localhost:3000/sessions/create', {
                     method: 'POST',
                     headers: {
-                        'Content-Type' : 'application/json'
+                        'Content-Type': 'application/json'
                     },
-                    body: JSON.stringify({username, password})
+                    body: JSON.stringify({ username, password })
                 });
 
-                if(response.status === 201){
+                if (response.status === 201) {
                     props.setCurrentUser(await response.json());
 
-                } else if(response.status === 401){
+                } else if (response.status === 401) {
                     setErrorMessage('Invalid username and/or password');
                     console.log(errorMessage);
                 } else {
@@ -48,7 +48,7 @@ export default function Login(props:ILoginProps) {
                     console.log(errorMessage);
                 }
 
-            } catch(err) {
+            } catch (err) {
                 console.log(err);
             }
         } else {
@@ -60,19 +60,19 @@ export default function Login(props:ILoginProps) {
 
     return (
         props.currentUser ?
-        <>
-            <Navigate to="/" />
-        </>
-        :
-    <>
-    <div>
-        <input type="text" id="login-username" placeholder="Enter your username here: " onChange={updateUsername}/>
-        <input type="text" id="login-password" placeholder="Enter your password here: " onChange={updatePassword}/>
-        <button id="login-button" onClick={login}>Submit</button>
-    </div>
-    <div>
-        {errorMessage}
-    </div>
-    </>
+            <>
+                <Navigate to="/" />
+            </>
+            :
+            <>
+                <div>
+                    <input type="text" id="login-username" placeholder="Enter your username here: " onChange={updateUsername} />
+                    <input type="text" id="login-password" placeholder="Enter your password here: " onChange={updatePassword} />
+                    <button id="login-button" onClick={login}>Submit</button>
+                </div>
+                <div>
+                    {errorMessage}
+                </div>
+            </>
     );
 }
