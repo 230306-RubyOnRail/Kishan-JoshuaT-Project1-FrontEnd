@@ -1,6 +1,7 @@
 import { SyntheticEvent, useState } from "react";
 import { User } from "../models/user";
 import { Navigate } from "react-router-dom";
+import { authenticate } from "../remote/services/sessions-service";
 
 interface ILoginProps {
     currentUser: User | undefined,
@@ -29,17 +30,20 @@ export default function Login(props: ILoginProps) {
             console.log(`username: ${username} and password: ${password}`);
 
             try {
-                let response = await fetch('http://localhost:3000/sessions/create', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({ username, password })
-                });
+                // let response = await fetch('http://localhost:3000/sessions/create', {
+                //     method: 'POST',
+                //     headers: {
+                //         'Content-Type': 'application/json'
+                //     },
+                //     body: JSON.stringify({ username, password })
+                // });
+
+                let response = await authenticate({username, password});
 
                 if (response.status === 201) {
-                    props.setCurrentUser(await response.json());
-
+                    let data: User = response.data;
+                    props.setCurrentUser(data);
+                    sessionStorage.setItem('token', data.token);
                 } else if (response.status === 401) {
                     setErrorMessage('Invalid username and/or password');
                     console.log(errorMessage);
