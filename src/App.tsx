@@ -16,7 +16,7 @@ function App() {
 
   return (
     <BrowserRouter>
-    <Nav currentUser={principal}/>
+    <Nav currentUser={principal} setCurrentUser={setPrincipal}/>
       <Routes>
         <Route path="/" element={<Dashboard currentUser={principal}/>}/>
         <Route path="/login" element={<Login currentUser={principal} setCurrentUser={setPrincipal}/>}/>

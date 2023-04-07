@@ -5,24 +5,29 @@ import ReimbursementList from "./ReimbursementList";
 import {Reimbursement as Reimbursement_Model} from "../models/reimbursement";
 import CreateReimbursements from "./createReimbursement";
 
+// table imports
+import Table from '@mui/material/Table';
+import TableBody from '@mui/material/TableBody';
+import TableCell from '@mui/material/TableCell';
+import TableContainer from '@mui/material/TableContainer';
+import TableHead from '@mui/material/TableHead';
+import TableRow from '@mui/material/TableRow';
+import Paper from '@mui/material/Paper';
+
 interface IReimbursementProps {
     currentUser: User | undefined
 }
 
 export default function Reimbursement(props: IReimbursementProps) {
 
-    const [reimbursements, setReimbursements] = useState();
+    const [reimbursements, setReimbursements] = useState<Reimbursement_Model[] | undefined>(undefined);
 
-
-    // function addReimbursement(item) {
-    //     setReimbursements(previousReimbursement => [...previousReimbursement, item]);
-    // }
 
     let response;
 
     useEffect(() => {
         getReimbursements();
-        
+
     },[]);
 
     let getReimbursements = async () => {
@@ -54,26 +59,43 @@ export default function Reimbursement(props: IReimbursementProps) {
             <Button variant="outlined" onClick={getResult}>Get reimbursement</Button>
             <CreateReimbursements />
 
-            
-            <ul>
-                <table>
-                    <tbody>
-                        {
-                            // reimbursements != undefined ?
-                            // reimbursements.map(items => {
-                            //     return <ReimbursementList status={items.status} user_id={items.user_id} id={items.id} description={items.description} amount={items.amount} created_at={items.created_at} updated_at={items.updated_at}   /> 
-                            // })
-                            // :
-                            // <></>
-                        }
-                            
-                    
-                                
-                        
-                    </tbody>
-                </table>
-            </ul>
 
+
+                        {
+                            (reimbursements != undefined) ?
+
+                            <TableContainer component={Paper}>
+                            <Table sx={{ minWidth: 650 }} aria-label="simple table">
+                              <TableHead>
+                                <TableRow>
+                                  <TableCell>Reimbursement ID</TableCell>
+                                  <TableCell align="right">Description</TableCell>
+                                  <TableCell align="right">Status</TableCell>
+                                  <TableCell align="right">Created At</TableCell>
+                                  <TableCell align="right">Updated At</TableCell>
+                                </TableRow>
+                              </TableHead>
+                              <TableBody>
+                                {reimbursements.map((item) => (
+                                  <TableRow
+                                    key={item.user_id}
+                                    sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                                  >
+                                    <TableCell component="th" scope="row">
+                                      {item.id}
+                                    </TableCell>
+                                    <TableCell align="right">{item.description}</TableCell>
+                                    <TableCell align="right">{item.status}</TableCell>
+                                    <TableCell align="right">{item.created_at}</TableCell>
+                                    <TableCell align="right">{item.updated_at}</TableCell>
+                                  </TableRow>
+                                ))}
+                              </TableBody>
+                            </Table>
+                          </TableContainer>
+                            :
+                            <></>
+                        }
 
         </>
     );
