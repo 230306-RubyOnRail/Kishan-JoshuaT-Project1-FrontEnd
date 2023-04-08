@@ -104,8 +104,8 @@ export default function Login(props: ILoginProps) {
           style={styleButton}
           required
           id="outlined-required"
-          label="Required"
-          defaultValue="Username"
+          label="Username"
+          variant="outlined"
           onChange={updateUsername}
         />
         <TextField
@@ -113,8 +113,9 @@ export default function Login(props: ILoginProps) {
           style={styleButton}
           required
           id="outlined-required"
-          label="Required"
-          defaultValue="Password"
+          label="Password"
+
+          variant="outlined"
           onChange={updatePassword}
         />
         <Button variant="contained" onClick={login}>

@@ -27,7 +27,7 @@ export default function Nav(props: INavProps) {
       <AppBar position="static">
         <Toolbar>
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-            News
+            Employee Reimbursement System
           </Typography>
           {x ? (
             <>
