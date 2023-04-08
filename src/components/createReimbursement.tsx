@@ -1,4 +1,4 @@
-import { SyntheticEvent, useState } from "react";
+import { SyntheticEvent, useState, useEffect } from "react";
 import { Reimbursement } from "../models/reimbursement";
 import { createReimburse } from "../remote/services/reimbursements-service";
 import Box from "@mui/material/Box";
@@ -8,52 +8,60 @@ import Stack from '@mui/material/Stack';
 import "../styles/reimbursement.css"
 
 
-// interface ICreateReimbursement {
-//     description:  |
-// }
+interface ICreateReimbursement {
+    getReimbursements: () => void | undefined;
+}
 
-export default function CreateReimbursements() {
-  const [description, setDescription] = useState("");
-  const [amount, setAmount] = useState("");
+export default function CreateReimbursements(props: ICreateReimbursement) {
+    // useEffect(async () => {
+    //     await props.getReimbursements();
+    // }, response
+    // );
 
-  let updateDescription = (e: SyntheticEvent) => {
-    setDescription((e.target as HTMLInputElement).value);
-    console.log("Update description worked.");
-  };
+    var response;
 
-  let updateAmount = (e: SyntheticEvent) => {
-    setAmount((e.target as HTMLInputElement).value);
-    console.log("Update amount worked.");
-  };
+    const [description, setDescription] = useState("");
+    const [amount, setAmount] = useState("");
 
-  let createButton = async (e: SyntheticEvent) => {
-    if (description && amount) {
-      console.log("Description and amount exists");
-      try {
-        let response = await createReimburse(description, amount);
+    let updateDescription = (e: SyntheticEvent) => {
+        setDescription((e.target as HTMLInputElement).value);
+        console.log("Update description worked.");
+    };
 
-        if (response.status === 200) {
-          console.log("It got added");
+    let updateAmount = (e: SyntheticEvent) => {
+        setAmount((e.target as HTMLInputElement).value);
+        console.log("Update amount worked.");
+    };
+
+    let createButton = async (e: SyntheticEvent) => {
+        if (description && amount) {
+            console.log("Description and amount exists");
+            try {
+                response = await createReimburse(description, amount);
+
+                if (response.status === 200) {
+                    console.log("It got added");
+                } else {
+                    console.log("Something went wrong.");
+                }
+            } catch (err) {
+                console.log(err);
+            }
         } else {
-          console.log("Something went wrong.");
+            console.log("Either one is missing");
         }
-      } catch (err) {
-        console.log(err);
-      }
-    } else {
-      console.log("Either one is missing");
-    }
-  };
+    };
 
-  return (
-    <div className="ReimbursementCreate">
-        <Stack spacing={3} direction="row">
-      <TextField id="outlined-basic" label="Description" variant="outlined" onChange={updateDescription}/>
+    return (
+        <div className="ReimbursementCreate">
+            <Stack spacing={3} direction="row">
+                <TextField id="outlined-basic" label="Description" variant="outlined" onChange={updateDescription} />
 
-      <TextField id="outlined-basic" label="Amount" variant="outlined" onChange={updateAmount}/>
+                <TextField id="outlined-basic" label="Amount" variant="outlined" onChange={updateAmount} />
 
-        </Stack>
-        <Button variant="contained"  className="createButton" onClick={createButton}>Create</Button>
-    </div>
-  );
+            </Stack>
+            <Button variant="contained" className="createButton" onClick={createButton}>Create</Button>
+            <Button variant="contained" onClick={props.getReimbursements()}>Refresh</Button>
+        </div>
+    );
 }

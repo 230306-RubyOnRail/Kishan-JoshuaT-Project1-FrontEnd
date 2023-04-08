@@ -41,8 +41,6 @@ export default function Reimbursement(props: IReimbursementProps) {
         if (response.status === 200) {
             let result = await response.json()
             setReimbursements(result);
-            console.log(result);
-            console.log(reimbursements);
         } else {
             console.log('Unable to retrieve reimbursements.');
         }
@@ -56,7 +54,7 @@ export default function Reimbursement(props: IReimbursementProps) {
     return (
         <>
 
-            <CreateReimbursements />
+            <CreateReimbursements getReimbursements={getResult()}/>
                         {
                             (reimbursements != undefined) ?
 
@@ -74,7 +72,7 @@ export default function Reimbursement(props: IReimbursementProps) {
                               <TableBody>
                                 {reimbursements.map((item) => (
                                   <TableRow
-                                    key={item.user_id}
+                                    key={item.id}
                                     sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                                   >
                                     <TableCell component="th" scope="row">
