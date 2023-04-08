@@ -1,13 +1,11 @@
-import * as React from "react";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
+import Button from "@mui/material/Button";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
-import Button from "@mui/material/Button";
-import IconButton from "@mui/material/IconButton";
-import MenuIcon from "@mui/icons-material/Menu";
-import { User } from "../models/user";
 import { Link } from "react-router-dom";
+import { User } from "../models/user";
+import "../styles/NavStyle.css"
 
 interface INavProps {
   currentUser: User | undefined;
@@ -22,7 +20,7 @@ export default function Nav(props: INavProps) {
   }
   let logout = () => {
     props.setCurrentUser(undefined);
-    };
+  };
 
   return (
     <Box sx={{ flexGrow: 1 }}>
@@ -33,23 +31,25 @@ export default function Nav(props: INavProps) {
           </Typography>
           {x ? (
             <>
-              <Button color="inherit">Manager</Button>
+              <Button color="inherit" className="link">
+                Manager
+              </Button>
             </>
           ) : (
             <></>
           )}
           <Button color="inherit">
-            <Link to="/reimbursement">Reimbursement</Link>
+            <Link to="/reimbursement" className="link">Reimbursement</Link>
           </Button>
-          {props.currentUser ?
+          {props.currentUser ? (
             <Button color="inherit" onClick={logout}>
-              <Link to="/login">Destroy</Link>
+              <Link to="/login"  className="link">Destroy</Link>
             </Button>
-            :
+          ) : (
             <Button color="inherit">
-            <Link to="/login">Login</Link>{" "}
-          </Button>
-        }
+              <Link to="/login" className="link">Login</Link>{" "}
+            </Button>
+          )}
         </Toolbar>
       </AppBar>
     </Box>
