@@ -1,0 +1,31 @@
+#outlined-basic {
+  margin: 0 auto;
+  align-self: center;
+  flex: 6em;
+}
+.ReimbursementCreate {
+  margin: 0 auto;
+
+  width: 40%;
+  padding-top: 10px;
+  justify-content: center;
+  display: flex;
+  flex-wrap: wrap;
+}
+.ReimbursementCreate .MuiFormControl-root {
+  width: 100%;
+  margin: 0 auto;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.createButton {
+  padding-top: 10px;
+  width: 50%;
+
+  color: white;
+}

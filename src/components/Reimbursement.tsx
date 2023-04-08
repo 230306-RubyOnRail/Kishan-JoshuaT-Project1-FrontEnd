@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { Reimbursement as Reimbursement_Model } from "../models/reimbursement";
 import { User } from "../models/user";
 import CreateReimbursements from "./createReimbursement";
+import "../styles/reimbursement.css"
 
 // table imports
 import Paper from '@mui/material/Paper';
@@ -54,12 +55,8 @@ export default function Reimbursement(props: IReimbursementProps) {
     // return is where things get rendered
     return (
         <>
-            <p>Reimbursement is good!</p>
-            <Button variant="outlined" onClick={getResult}>Get reimbursement</Button>
+
             <CreateReimbursements />
-
-
-
                         {
                             (reimbursements != undefined) ?
 
