@@ -3,6 +3,7 @@ import { User } from "../../models/user";
 import CreateUser from "./createUser";
 import SpecificReimbursement from "./SpecificReimbursement";
 import GetUsers from "./Users";
+import ManagerNav from "./ManagerNav";
 interface IManagerProps {
   currentUser: User | undefined;
 }
@@ -10,11 +11,12 @@ export default function Manager(props: IManagerProps) {
   return props.currentUser ? (
     props.currentUser.account_type === "manager" ? (
         <>
-      <h1>Manager</h1>
+        <ManagerNav />
+      <h2>Manager</h2>
+      <p>Create User</p>
       <CreateUser />
       <br />
-      <GetUsers />
-      <br />
+      <p>Reimbursements from a User</p>
       <SpecificReimbursement />
       </>
     ) : (
