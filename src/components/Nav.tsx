@@ -32,7 +32,7 @@ export default function Nav(props: INavProps) {
           {x ? (
             <>
               <Button color="inherit" className="link">
-                Manager
+                <Link to="/manager" className="link">Manager</Link>
               </Button>
             </>
           ) : (

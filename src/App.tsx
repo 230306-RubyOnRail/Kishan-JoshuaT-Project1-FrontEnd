@@ -6,6 +6,7 @@ import Login from './components/Login';
 import Nav from './components/Nav';
 import Reimbursement from './components/Reimbursement';
 import { User } from './models/user';
+import Manager from './components/manager/Manager';
 
 
 
@@ -20,6 +21,7 @@ function App() {
         <Route path="/" element={<Dashboard currentUser={principal}/>}/>
         <Route path="/login" element={<Login currentUser={principal} setCurrentUser={setPrincipal}/>}/>
         <Route path="/reimbursement" element={<Reimbursement currentUser={principal}/>}/>
+        <Route path="/manager" element={<Manager currentUser={principal}/>}/>
       </Routes>
     </BrowserRouter>
   );
