@@ -53,8 +53,13 @@ export default function Reimbursement(props: IReimbursementProps) {
     // return is where things get rendered
     return (
         <>
+        
+        <Button variant="contained" className="createButton" onClick={getReimbursements}>Refresh</Button>
 
-            <CreateReimbursements getReimbursements={getResult()}/>
+            {/* <CreateReimbursements getReimbursements={getResult()}/> */}
+            <CreateReimbursements />
+
+            
                         {
                             (reimbursements != undefined) ?
 

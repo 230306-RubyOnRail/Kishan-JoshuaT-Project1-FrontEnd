@@ -8,20 +8,25 @@ import Stack from '@mui/material/Stack';
 import "../styles/reimbursement.css"
 
 
+
 interface ICreateReimbursement {
     getReimbursements: () => void | undefined;
 }
 
-export default function CreateReimbursements(props: ICreateReimbursement) {
+export default function CreateReimbursements(props: any) {
     // useEffect(async () => {
     //     await props.getReimbursements();
     // }, response
     // );
 
+    
+
     var response;
 
     const [description, setDescription] = useState("");
     const [amount, setAmount] = useState("");
+
+
 
     let updateDescription = (e: SyntheticEvent) => {
         setDescription((e.target as HTMLInputElement).value);
@@ -60,8 +65,9 @@ export default function CreateReimbursements(props: ICreateReimbursement) {
                 <TextField id="outlined-basic" label="Amount" variant="outlined" onChange={updateAmount} />
 
             </Stack>
+            
             <Button variant="contained" className="createButton" onClick={createButton}>Create</Button>
-            <Button variant="contained" onClick={props.getReimbursements()}>Refresh</Button>
+            
         </div>
     );
 }
