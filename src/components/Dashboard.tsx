@@ -10,7 +10,7 @@ export default function Dashboard(props:IDashboardProps) {
     return(
         props.currentUser ?
         <>
-            Hello {props.currentUser.username} token: {props.currentUser.token}. You're id is {props.currentUser.user_id}, and you're a {props.currentUser.account_type}
+            Hello {props.currentUser.username} token: {props.currentUser.token}. You're id is {props.currentUser.id}, and you're a {props.currentUser.account_type}
         </>
         :
         <>

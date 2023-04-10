@@ -13,13 +13,13 @@ export type UserType = {
 }
 
 export class User {
-    user_id: number;
+    id: number;
     username: string;
     account_type: string;
     token: string;
 
-    constructor(user_id: number, username: string, account_type: string, token: string) {
-        this.user_id = user_id;
+    constructor(id: number, username: string, account_type: string, token: string) {
+        this.id = id;
         this.username = username;
         this.account_type = account_type;
         this.token = token;
