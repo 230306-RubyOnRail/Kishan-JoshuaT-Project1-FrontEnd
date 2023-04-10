@@ -1,11 +1,11 @@
 #outlined-basic {
-  margin: 0 auto;
   align-self: center;
   flex: 6em;
+  width: 100%;
+  padding-right: 100px;
 }
 .ReimbursementCreate {
   margin: 0 auto;
-
   width: 40%;
   padding-top: 10px;
   justify-content: center;
@@ -26,6 +26,22 @@
 .createButton {
   padding-top: 10px;
   width: 50%;
-
   color: white;
 }
+.reimbursement {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  margin-top: 10px;
+}
+.refreshButton {
+  flex: 3;
+
+  margin-top: 10px;
+  width: 20%;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
