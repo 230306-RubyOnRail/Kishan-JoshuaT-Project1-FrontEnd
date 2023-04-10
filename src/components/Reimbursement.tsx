@@ -54,7 +54,7 @@ export default function Reimbursement(props: IReimbursementProps) {
     return (
         <>
 
-            <CreateReimbursements getReimbursements={getResult()}/>
+            <CreateReimbursements/>
                         {
                             (reimbursements != undefined) ?
 

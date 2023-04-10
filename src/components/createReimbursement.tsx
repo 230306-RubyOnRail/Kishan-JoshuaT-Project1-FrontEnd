@@ -12,7 +12,7 @@ interface ICreateReimbursement {
     getReimbursements: () => void | undefined;
 }
 
-export default function CreateReimbursements(props: ICreateReimbursement) {
+export default function CreateReimbursements() {
     // useEffect(async () => {
     //     await props.getReimbursements();
     // }, response
@@ -61,7 +61,7 @@ export default function CreateReimbursements(props: ICreateReimbursement) {
 
             </Stack>
             <Button variant="contained" className="createButton" onClick={createButton}>Create</Button>
-            <Button variant="contained" onClick={props.getReimbursements()}>Refresh</Button>
+            {/* <Button variant="contained" onClick={props.getReimbursements()}>Refresh</Button> */}
         </div>
     );
 }
