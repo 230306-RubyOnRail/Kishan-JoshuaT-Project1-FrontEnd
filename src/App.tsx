@@ -8,12 +8,15 @@ import Reimbursement from './components/Reimbursement';
 import { User } from './models/user';
 import Manager from './components/manager/Manager';
 import GetUsers from './components/manager/Users';
+import SpecificReimbursement from './components/manager/SpecificReimbursement';
+import ListReimbursement from './components/manager/ListReimbursement';
 
 
 
 function App() {
 
   const [principal, setPrincipal] = useState<User>();
+  const [userID, setUserID] = useState<number>(0);
 
   return (
     <BrowserRouter>
@@ -22,10 +25,11 @@ function App() {
         <Route path="/" element={<Dashboard currentUser={principal}/>}/>
         <Route path="/login" element={<Login currentUser={principal} setCurrentUser={setPrincipal}/>}/>
         <Route path="/reimbursement" element={<Reimbursement currentUser={principal}/>}/>
-        <Route path="/manager" element={<Manager currentUser={principal}/>}/>
+        <Route path="/manager" element={<Manager currentUser={principal} setUserID={setUserID}/>}/>
 
         {/* Manager Routes */}
         <Route path="/manager/allusers" element={<GetUsers/>}/>
+        <Route path="/manager/specificreimbursement" element={<ListReimbursement userID={userID}/>}/>
       </Routes>
     </BrowserRouter>
   );

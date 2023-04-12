@@ -6,6 +6,7 @@ import GetUsers from "./Users";
 import ManagerNav from "./ManagerNav";
 interface IManagerProps {
   currentUser: User | undefined;
+  setUserID: (userID: number) => void;
 }
 export default function Manager(props: IManagerProps) {
   return props.currentUser ? (
@@ -17,7 +18,7 @@ export default function Manager(props: IManagerProps) {
       <CreateUser />
       <br />
       <p>Reimbursements from a User</p>
-      <SpecificReimbursement />
+      <SpecificReimbursement setUserID={props.setUserID}/>
       </>
     ) : (
       <>
