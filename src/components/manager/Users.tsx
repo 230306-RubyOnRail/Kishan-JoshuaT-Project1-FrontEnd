@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
 import { getAllUsers as getAll } from "../../remote/services/getallusers-service";
-import { User } from "../../models/user";
-import { Button } from "@mui/material";
+import { AllUser as User } from "../../models/user";
+import { Button, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from "@mui/material";
 import { Link } from "react-router-dom";
+import '../../styles/NavStyle.css'
 export default function GetUsers() {
 
     const [users, setUsers] = useState<User[] | undefined>(undefined);
@@ -27,18 +28,36 @@ export default function GetUsers() {
     }
     return (
         <div>
-             <Button variant="contained" color="primary"><Link to="/manager">Get Users</Link></Button>
+             <Button variant="contained" className="link"><Link to="/manager" className="link">Back</Link></Button>
             {
-                users?.map((user) => {
-                    return (
-                        <div>
 
-                            <p>Username: {user.username}, User ID: {user.id}</p>
+                    <TableContainer component={Paper}>
+                            <Table sx={{ minWidth: 350 }} aria-label="simple table">
+                              <TableHead>
+                                <TableRow>
+                                  <TableCell>ID</TableCell>
+                                  <TableCell align="left">Name</TableCell>
+                                  <TableCell align="left">Username</TableCell>
 
+                                </TableRow>
+                              </TableHead>
+                              <TableBody>
+                                {users?.map((item) => (
+                                  <TableRow
+                                    key={item.id}
+                                    sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                                  >
+                                    <TableCell component="th" scope="row">
+                                      {item.id}
+                                    </TableCell>
+                                    <TableCell align="left">{item.name}</TableCell>
+                                    <TableCell align="left">{item.username}</TableCell>
 
-                        </div>
-                    )
-                })
+                                  </TableRow>
+                                ))}
+                              </TableBody>
+                            </Table>
+                          </TableContainer>
             }
         </div>
     );
