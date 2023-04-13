@@ -8,8 +8,10 @@ import Reimbursement from './components/Reimbursement';
 import { User } from './models/user';
 import Manager from './components/manager/Manager';
 import GetUsers from './components/manager/Users';
+import Modify from './components/Modify';
 import SpecificReimbursement from './components/manager/SpecificReimbursement';
 import ListReimbursement from './components/manager/ListReimbursement';
+
 
 
 
@@ -26,6 +28,8 @@ function App() {
         <Route path="/login" element={<Login currentUser={principal} setCurrentUser={setPrincipal}/>}/>
         <Route path="/reimbursement" element={<Reimbursement currentUser={principal}/>}/>
         <Route path="/manager" element={<Manager currentUser={principal} setUserID={setUserID}/>}/>
+
+        <Route path="/reimbursement/modify" element={<Modify/>}/>
 
         {/* Manager Routes */}
         <Route path="/manager/allusers" element={<GetUsers/>}/>

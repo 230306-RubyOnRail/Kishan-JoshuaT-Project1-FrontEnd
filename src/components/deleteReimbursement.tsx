@@ -1,6 +1,6 @@
 import { SyntheticEvent, useState, useEffect } from "react";
 import { Reimbursement } from "../models/reimbursement";
-import { createReimburse, updateReimburse } from "../remote/services/reimbursements-service";
+import { createReimburse, deleteReimburse } from "../remote/services/reimbursements-service";
 import { Reimbursement as Reimbursement_Model } from "../models/reimbursement";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
@@ -9,14 +9,10 @@ import Stack from '@mui/material/Stack';
 import "../styles/reimbursement.css"
 
 
-export default function UpdateReimbursement() {
+export default function DeleteReimbursement() {
 
     // const [reimbursement, setReimbursements] = useState<Reimbursement_Model[] | undefined>(undefined);
-    const [description, setDescription] = useState("");
-    const [amount, setAmount] = useState("");
     const [id, setId] = useState(0);
-
-    const [errorMessage, setErrorMessage] = useState("");
 
 
     // useEffect(() => {
@@ -24,28 +20,19 @@ export default function UpdateReimbursement() {
 
     // },[]);
 
-    let updateDescription = (e: SyntheticEvent) => {
-        setDescription((e.target as HTMLInputElement).value);
-        console.log("Update description worked.");
-    }
 
-    let updateAmount = (e: SyntheticEvent) => {
-        setAmount((e.target as HTMLInputElement).value);
-        console.log("Update amount worked.");
-    }
-
-    let updateId = (e: React.ChangeEvent<HTMLInputElement>) => {
+    let deleteId = (e: React.ChangeEvent<HTMLInputElement>) => {
         //Number converts the e.target.value string to number
         setId(Number(e.target.value));
-        console.log("Update ID worked.");
+        console.log("Delete ID worked.");
     }
 
-    let updateReimbursements = async () => {
+    let deleteReimbursements = async () => {
 
         // let response = await updateReimburse(description, amount, id);
 
         try {
-            let response = await updateReimburse(description, amount, id);
+            let response = await deleteReimburse(id);
             if (response.status === 200) {
                 console.log(response.data);
             }
@@ -81,12 +68,9 @@ export default function UpdateReimbursement() {
     // return is where things get rendered
     return (
         <div>
-            <TextField id="outlined-basic" label="Description" variant="outlined" onChange={updateDescription}/>
-            <TextField id="outlined-basic" label="Amount" variant="outlined" onChange={updateAmount}/>
-            <TextField id="outlined-basic" label="ReimbursementID" variant="outlined" type="number" onChange={updateId}/>
-            <Button variant="contained" className="updateButton" onClick={updateReimbursements}>Update</Button>
-
-            <p>{errorMessage}</p>
+            <h2>Delete Reimbursements</h2>
+            <TextField id="outlined-basic" label="ReimbursementID" variant="outlined" type="number" onChange={deleteId}/>
+            <Button variant="contained" className="deleteButton" onClick={deleteReimbursements}>Delete</Button>
         </div>
     );
 
