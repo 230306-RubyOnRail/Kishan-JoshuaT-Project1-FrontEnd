@@ -22,6 +22,7 @@ interface IReimbursementProps {
 export default function Reimbursement(props: IReimbursementProps) {
 
     const [reimbursements, setReimbursements] = useState<Reimbursement_Model[] | undefined>(undefined);
+    const [errorMessage, setErrorMessage] = useState("");
 
 
     let response;
@@ -40,17 +41,18 @@ export default function Reimbursement(props: IReimbursementProps) {
         })
 
         if (response.status === 200) {
-            let result = await response.json()
+            let result = await response.json();
+            setErrorMessage("");
             setReimbursements(result);
         } else {
-            console.log('Unable to retrieve reimbursements.');
+            setErrorMessage('Unable to retrieve reimbursements.');
         }
 
     }
-    let getResult = (() => {
-        getReimbursements();
-        console.log(reimbursements);
-    });
+    // let getResult = (() => {
+    //     getReimbursements();
+    //     console.log(reimbursements);
+    // });
     // return is where things get rendered
     return (
 
@@ -75,6 +77,7 @@ export default function Reimbursement(props: IReimbursementProps) {
                                   <TableCell>Reimbursement ID</TableCell>
                                   <TableCell align="right">Description</TableCell>
                                   <TableCell align="right">Status</TableCell>
+                                  <TableCell align="right">Amount</TableCell>
                                   <TableCell align="right">Created At</TableCell>
                                   <TableCell align="right">Updated At</TableCell>
                                 </TableRow>
@@ -90,6 +93,7 @@ export default function Reimbursement(props: IReimbursementProps) {
                                     </TableCell>
                                     <TableCell align="right">{item.description}</TableCell>
                                     <TableCell align="right">{item.status}</TableCell>
+                                    <TableCell align="right">${item.amount}</TableCell>
                                     <TableCell align="right">{item.created_at}</TableCell>
                                     <TableCell align="right">{item.updated_at}</TableCell>
                                   </TableRow>

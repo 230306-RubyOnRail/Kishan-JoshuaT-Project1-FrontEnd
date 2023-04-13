@@ -27,35 +27,35 @@ export default function CreateReimbursements(props: any) {
 
     const [description, setDescription] = useState("");
     const [amount, setAmount] = useState("");
+    const [errorMessage, setErrorMessage] = useState("");
 
 
 
     let updateDescription = (e: SyntheticEvent) => {
         setDescription((e.target as HTMLInputElement).value);
-        console.log("Update description worked.");
     };
 
     let updateAmount = (e: SyntheticEvent) => {
         setAmount((e.target as HTMLInputElement).value);
-        console.log("Update amount worked.");
     };
 
     let createButton = async (e: SyntheticEvent) => {
         if (description && amount) {
-            console.log("Description and amount exists");
+            setErrorMessage("");
             try {
                 response = await createReimburse(description, amount);
 
                 if (response.status === 200) {
-                    console.log("It got added");
+                    
                 } else {
-                    console.log("Something went wrong.");
+                    setErrorMessage("Something went wrong.");
                 }
             } catch (err) {
+                setErrorMessage("Unable to send request.");
                 console.log(err);
             }
         } else {
-            console.log("Either one is missing");
+            setErrorMessage("Either one is missing");
         }
     };
 

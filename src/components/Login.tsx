@@ -57,10 +57,9 @@ export default function Login(props: ILoginProps) {
   };
 
   let login = async (e: SyntheticEvent) => {
-    console.log(`username: ${username} and password: ${password}`);
     if (username && password) {
       setErrorMessage("");
-      console.log(`username: ${username} and password: ${password}`);
+
 
       try {
         // let response = await fetch('http://localhost:3000/sessions/create', {
@@ -79,12 +78,11 @@ export default function Login(props: ILoginProps) {
           sessionStorage.setItem("token", data.token);
         } else if (response.status === 401) {
           setErrorMessage("Invalid username and/or password");
-          console.log(errorMessage);
         } else {
           setErrorMessage("Unable to reach API");
-          console.log(errorMessage);
         }
       } catch (err) {
+        setErrorMessage("Unable to connect to back-end.");
         console.log(err);
       }
     } else {
