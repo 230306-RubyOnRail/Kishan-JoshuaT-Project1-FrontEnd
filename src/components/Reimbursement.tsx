@@ -13,6 +13,7 @@ import TableCell from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
+import { Navigate } from "react-router-dom";
 
 interface IReimbursementProps {
     currentUser: User | undefined
@@ -52,7 +53,9 @@ export default function Reimbursement(props: IReimbursementProps) {
     });
     // return is where things get rendered
     return (
+
         <>
+        { props.currentUser ?
         <div className="reimbursement">
         <Button variant="contained" className="refreshButton" onClick={getReimbursements}>Refresh</Button>
 
@@ -98,6 +101,11 @@ export default function Reimbursement(props: IReimbursementProps) {
                             <></>
                         }
         </div>
+        :
+        <>
+        <Navigate to="/login"/>
+        </>
+        }
         </>
     );
 }
