@@ -21,7 +21,6 @@ export default function ListReimbursement(props: IListReimbursementProps) {
             if (response.status === 200) {
                 let data = await response.data;
                 getReimbursementList(data);
-
             }
 
         } catch (e) {
@@ -31,7 +30,7 @@ export default function ListReimbursement(props: IListReimbursementProps) {
 
     return (
         <div>
-            <h1>List Reimbursement of {props.userID}, </h1>
+            <h1>List Reimbursement of userID: {props.userID}, </h1>
             {
                             (reimbursements != undefined) ?
 
@@ -42,6 +41,7 @@ export default function ListReimbursement(props: IListReimbursementProps) {
                                   <TableCell>Reimbursement ID</TableCell>
                                   <TableCell align="right">Description</TableCell>
                                   <TableCell align="right">Status</TableCell>
+                                  <TableCell align="right">Amount</TableCell>
                                   <TableCell align="right">Created At</TableCell>
                                   <TableCell align="right">Updated At</TableCell>
                                 </TableRow>
@@ -57,6 +57,7 @@ export default function ListReimbursement(props: IListReimbursementProps) {
                                     </TableCell>
                                     <TableCell align="right">{item.description}</TableCell>
                                     <TableCell align="right">{item.status}</TableCell>
+                                    <TableCell align="right">${item.amount}</TableCell>
                                     <TableCell align="right">{item.created_at}</TableCell>
                                     <TableCell align="right">{item.updated_at}</TableCell>
                                   </TableRow>

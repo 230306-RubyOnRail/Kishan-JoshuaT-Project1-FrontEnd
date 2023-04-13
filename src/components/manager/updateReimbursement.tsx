@@ -1,6 +1,6 @@
 import { TextField, Button } from "@mui/material";
 import { useState, SyntheticEvent } from "react";
-import { updateReimburse } from "../../remote/services/reimbursements-service";
+import { updateReimburse, updateReimburseManager } from "../../remote/services/reimbursements-service";
 
 export default function UpdateReimbursementManager() {
     const [description, setDescription] = useState("");
@@ -42,7 +42,7 @@ export default function UpdateReimbursementManager() {
         // let response = await updateReimburse(description, amount, id);
 
         try {
-            let response = await updateReimburse(description, amount, id);
+            let response = await updateReimburseManager(description, amount, id, status);
             if (response.status === 200) {
                 console.log(response.data);
             }
@@ -79,10 +79,11 @@ export default function UpdateReimbursementManager() {
     return (
         <div>
             <h3>Update Reimbursement</h3>
+            <TextField id="outlined-basic" label="ReimbursementID" variant="outlined" type="number" onChange={updateId}/>
             <TextField id="outlined-basic" label="Description" variant="outlined" onChange={updateDescription}/>
             <TextField id="outlined-basic" label="Amount" variant="outlined" onChange={updateAmount}/>
-            <TextField id="outlined-basic" label="ReimbursementID" variant="outlined" type="number" onChange={updateId}/>
-            <TextField id="outlined-basic" label="Status" variant="outlined" type="number" onChange={updateStatus}/>
+
+            <TextField id="outlined-basic" label="Status" variant="outlined" onChange={updateStatus}/>
             <Button variant="contained" className="updateButton" onClick={updateReimbursements}>Update</Button>
 
             <p>{errorMessage}</p>
