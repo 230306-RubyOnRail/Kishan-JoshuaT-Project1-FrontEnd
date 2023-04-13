@@ -8,6 +8,7 @@ import Reimbursement from './components/Reimbursement';
 import { User } from './models/user';
 import Manager from './components/manager/Manager';
 import GetUsers from './components/manager/Users';
+import Modify from './components/Modify';
 
 
 
@@ -23,6 +24,8 @@ function App() {
         <Route path="/login" element={<Login currentUser={principal} setCurrentUser={setPrincipal}/>}/>
         <Route path="/reimbursement" element={<Reimbursement currentUser={principal}/>}/>
         <Route path="/manager" element={<Manager currentUser={principal}/>}/>
+
+        <Route path="/reimbursement/modify" element={<Modify/>}/>
 
         {/* Manager Routes */}
         <Route path="/manager/allusers" element={<GetUsers/>}/>
