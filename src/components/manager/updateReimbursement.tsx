@@ -18,36 +18,39 @@ export default function UpdateReimbursementManager() {
 
     let updateStatus = (e: SyntheticEvent) => {
         setStatus((e.target as HTMLInputElement).value);
-        console.log("Update status worked.");
+
+
     }
 
     let updateDescription = (e: SyntheticEvent) => {
         setDescription((e.target as HTMLInputElement).value);
-        console.log("Update description worked.");
+
     }
 
     let updateAmount = (e: SyntheticEvent) => {
         setAmount((e.target as HTMLInputElement).value);
-        console.log("Update amount worked.");
     }
 
     let updateId = (e: React.ChangeEvent<HTMLInputElement>) => {
         //Number converts the e.target.value string to number
         setId(Number(e.target.value));
-        console.log("Update ID worked.");
+
     }
 
     let updateReimbursements = async () => {
+        setErrorMessage("");
 
         // let response = await updateReimburse(description, amount, id);
 
         try {
             let response = await updateReimburseManager(description, amount, id, status);
             if (response.status === 200) {
-                console.log(response.data);
+                // console.log(response.data);
+                setErrorMessage("Reimbursement updated successfully");
             }
         } catch (err) {
             console.log(err);
+            setErrorMessage("Unable to send the request.");
         }
 
 
