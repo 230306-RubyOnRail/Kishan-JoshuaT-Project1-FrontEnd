@@ -16,7 +16,7 @@ export default function SpecificReimbursement(props: ISpecificReimbursementProps
     return (
         <div>
                 <TextField id="outlined-basic" label="User ID for list of reimbursements" variant="outlined" onChange={updateUserID}/>
-                <Button variant="contained" className="link"><Link to="/manager/specificreimbursement">Get Reimbursements</Link></Button>
+                <Button variant="contained" className="link"><Link to="/manager/specificreimbursement" className="link">Get Reimbursements</Link></Button>
         </div>
     );
 }

@@ -4,6 +4,8 @@ import CreateUser from "./createUser";
 import SpecificReimbursement from "./SpecificReimbursement";
 import GetUsers from "./Users";
 import ManagerNav from "./ManagerNav";
+import DeleteReimbursement from "../deleteReimbursement";
+import UpdateReimbursementManager from "./updateReimbursement";
 interface IManagerProps {
   currentUser: User | undefined;
   setUserID: (userID: number) => void;
@@ -14,11 +16,13 @@ export default function Manager(props: IManagerProps) {
         <>
         <ManagerNav />
       <h2>Manager</h2>
-      <p>Create User</p>
+      <h4>Create User</h4>
       <CreateUser />
       <br />
-      <p>Reimbursements from a User</p>
+      <h3>Reimbursements from a User</h3>
       <SpecificReimbursement setUserID={props.setUserID}/>
+      <UpdateReimbursementManager />
+      <DeleteReimbursement />
       </>
     ) : (
       <>

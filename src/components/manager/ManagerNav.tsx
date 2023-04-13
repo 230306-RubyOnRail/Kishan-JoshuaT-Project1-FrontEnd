@@ -8,7 +8,7 @@ import '../../styles/NavStyle.css'
 export default function ManagerNav() {
     return (
         <div className="managerNav">
-        <h1>Manager Nav</h1>
+        <h2>Manager Nav</h2>
         <Button variant="contained" className="link">
             <Link to="/manager/allusers" className="link">Get Users</Link>
         </Button>
