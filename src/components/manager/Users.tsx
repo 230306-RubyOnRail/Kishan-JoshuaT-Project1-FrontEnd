@@ -38,6 +38,7 @@ export default function GetUsers() {
                                   <TableCell>ID</TableCell>
                                   <TableCell align="left">Name</TableCell>
                                   <TableCell align="left">Username</TableCell>
+                                  <TableCell align="left">Account Type</TableCell>
 
                                 </TableRow>
                               </TableHead>
@@ -52,6 +53,7 @@ export default function GetUsers() {
                                     </TableCell>
                                     <TableCell align="left">{item.name}</TableCell>
                                     <TableCell align="left">{item.username}</TableCell>
+                                    <TableCell align="left">{item.account_type}</TableCell>
 
                                   </TableRow>
                                 ))}

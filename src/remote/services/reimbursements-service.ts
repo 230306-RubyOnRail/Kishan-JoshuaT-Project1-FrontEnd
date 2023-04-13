@@ -19,6 +19,14 @@ export const updateReimburse = async (description: string, amount: string, id: n
     })
 }
 
+export const updateReimburseManager = async (description: string, amount: string, id: number, status: string) => {
+    return await authAppClient.put(`/reimbursement/update/${id}`, {
+        description: description,
+        amount: amount,
+        status: status
+    })
+}
+
 export const deleteReimburse = async (id: number) => {
     return await authAppClient.delete(`/reimbursement/delete/${id}`)
 }

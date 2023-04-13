@@ -1,6 +1,7 @@
 import Stack from '@mui/material/Stack';
 import { User } from '../models/user';
 import { Navigate } from 'react-router-dom';
+import { useEffect } from 'react';
 
 
 interface IDashboardProps {
@@ -8,6 +9,11 @@ interface IDashboardProps {
 }
 
 export default function Dashboard(props:IDashboardProps) {
+    useEffect (() => {
+        console.log(props.currentUser?.id);
+        console.log(props.currentUser?.username);
+
+    }, []);
     return(
         props.currentUser ?
         <>
