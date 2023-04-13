@@ -38,13 +38,14 @@ export default function UpdateReimbursementManager() {
     }
 
     let updateReimbursements = async () => {
+        setErrorMessage("");
 
         // let response = await updateReimburse(description, amount, id);
 
         try {
             let response = await updateReimburseManager(description, amount, id, status);
             if (response.status === 200) {
-                console.log(response.data);
+                // console.log(response.data);
                 setErrorMessage("Reimbursement updated successfully");
             }
         } catch (err) {

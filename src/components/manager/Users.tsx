@@ -7,22 +7,26 @@ import '../../styles/NavStyle.css'
 export default function GetUsers() {
 
     const [users, setUsers] = useState<User[] | undefined>(undefined);
+    const [errorMessage, setErrorMessage] = useState("");
 
     useEffect (() => {
         getAllUsers();
     }, []);
 
     let getAllUsers = async () => {
+      setErrorMessage("");
         try {
             let response = await getAll();
             if (response.status === 200) {
-                console.log(response.data);
+                // console.log(response.data);
                 setUsers(response.data);
 
+            } else {
+                setErrorMessage("Unable to retrieve users.");
             }
         } catch (err) {
             console.log(err);
-
+            setErrorMessage("Unable to retrieve users.");
         }
 
     }
@@ -61,6 +65,7 @@ export default function GetUsers() {
                             </Table>
                           </TableContainer>
             }
+            {errorMessage}
         </div>
     );
 }

@@ -33,6 +33,7 @@ export default function CreateUser() {
     };
 
     let createButton = (e: SyntheticEvent) => {
+        setErrorMessage("");
         if (name && username && password && accountType) {
             createUser(name, username, password, accountType);
             console.log("User Created");
