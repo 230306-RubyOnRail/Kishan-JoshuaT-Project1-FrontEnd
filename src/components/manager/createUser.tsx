@@ -11,6 +11,7 @@ export default function CreateUser() {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const [accountType, setAccountType] = useState("");
+    const [errorMessage, setErrorMessage] = useState("");
 
     let updateName = (e: SyntheticEvent) => {
         setName((e.target as HTMLInputElement).value);
@@ -34,8 +35,11 @@ export default function CreateUser() {
     let createButton = (e: SyntheticEvent) => {
         if (name && username && password && accountType) {
             createUser(name, username, password, accountType);
+            console.log("User Created");
+            setErrorMessage("User Created");
         } else {
             console.log("One or more fields are missing");
+            setErrorMessage("One or more fields are missing");
         }
     };
 
@@ -50,7 +54,9 @@ export default function CreateUser() {
                 <TextField id="outlined-basic" label="Password" variant="outlined" onChange={updatePassword}/>
                 <TextField id="outlined-basic" label="Account Type" variant="outlined" onChange={updateAccountType}/>
                 <Button variant="contained" className="createUserButton" onClick={createButton}>Create</Button>
+                <p>{errorMessage}</p>
             </Stack>
+
         </>
     );
 }
