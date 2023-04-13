@@ -26,18 +26,15 @@ export default function UpdateReimbursement() {
 
     let updateDescription = (e: SyntheticEvent) => {
         setDescription((e.target as HTMLInputElement).value);
-        console.log("Update description worked.");
     }
 
     let updateAmount = (e: SyntheticEvent) => {
         setAmount((e.target as HTMLInputElement).value);
-        console.log("Update amount worked.");
     }
 
     let updateId = (e: React.ChangeEvent<HTMLInputElement>) => {
         //Number converts the e.target.value string to number
         setId(Number(e.target.value));
-        console.log("Update ID worked.");
     }
 
     let updateReimbursements = async () => {
@@ -47,9 +44,12 @@ export default function UpdateReimbursement() {
         try {
             let response = await updateReimburse(description, amount, id);
             if (response.status === 200) {
-                console.log(response.data);
+                setErrorMessage("");
+            } else {
+                setErrorMessage("Unable to update reimbursement.");
             }
         } catch (err) {
+            setErrorMessage("Unable to send request.")
             console.log(err);
         }
 
@@ -81,6 +81,7 @@ export default function UpdateReimbursement() {
     // return is where things get rendered
     return (
         <div>
+            <h2>Update Reimbursements</h2>
             <TextField id="outlined-basic" label="Description" variant="outlined" onChange={updateDescription}/>
             <TextField id="outlined-basic" label="Amount" variant="outlined" onChange={updateAmount}/>
             <TextField id="outlined-basic" label="ReimbursementID" variant="outlined" type="number" onChange={updateId}/>

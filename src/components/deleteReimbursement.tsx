@@ -13,6 +13,7 @@ export default function DeleteReimbursement() {
 
     // const [reimbursement, setReimbursements] = useState<Reimbursement_Model[] | undefined>(undefined);
     const [id, setId] = useState(0);
+    const [errorMessage, setErrorMessage] = useState("");
 
 
     // useEffect(() => {
@@ -24,7 +25,6 @@ export default function DeleteReimbursement() {
     let deleteId = (e: React.ChangeEvent<HTMLInputElement>) => {
         //Number converts the e.target.value string to number
         setId(Number(e.target.value));
-        console.log("Delete ID worked.");
     }
 
     let deleteReimbursements = async () => {
@@ -34,9 +34,12 @@ export default function DeleteReimbursement() {
         try {
             let response = await deleteReimburse(id);
             if (response.status === 200) {
-                console.log(response.data);
+                setErrorMessage("");
+            } else {
+                setErrorMessage("Unable to delete request.");
             }
         } catch (err) {
+            setErrorMessage("Unable to send request.");
             console.log(err);
         }
 

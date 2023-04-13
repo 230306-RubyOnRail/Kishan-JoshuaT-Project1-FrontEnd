@@ -29,7 +29,7 @@ function App() {
         <Route path="/reimbursement" element={<Reimbursement currentUser={principal}/>}/>
         <Route path="/manager" element={<Manager currentUser={principal} setUserID={setUserID}/>}/>
 
-        <Route path="/reimbursement/modify" element={<Modify/>}/>
+        <Route path="/reimbursement/modify" element={<Modify currentUser={principal}/>}/>
 
         {/* Manager Routes */}
         <Route path="/manager/allusers" element={<GetUsers/>}/>

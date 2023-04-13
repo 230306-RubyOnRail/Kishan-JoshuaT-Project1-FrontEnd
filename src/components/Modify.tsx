@@ -9,17 +9,29 @@ import UpdateReimbursement from "./updateReimbursement";
 import { createReimburse, updateReimburse } from "../remote/services/reimbursements-service";
 import "../styles/NavStyle.css"
 import DeleteReimbursement from "./deleteReimbursement";
+import { Navigate } from "react-router-dom";
 
+interface IModifyProps {
+    currentUser: User | undefined
+}
 
-export default function Modify() {
+export default function Modify(props: IModifyProps) {
 
 
 
 
     return (
         <>
-        <UpdateReimbursement />
-        <DeleteReimbursement />
-        </>
-    )
+            { props.currentUser ?
+            <>
+            <UpdateReimbursement />
+            <DeleteReimbursement />
+            </>
+            :
+            <>
+            <Navigate to="/login"/>
+            </>    
+    }
+    </>
+        );
 }
