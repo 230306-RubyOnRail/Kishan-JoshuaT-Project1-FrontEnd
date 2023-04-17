@@ -1,12 +1,13 @@
-import { TextField, Button } from "@mui/material";
-import { useState, SyntheticEvent } from "react";
-import { updateReimburse, updateReimburseManager } from "../../remote/services/reimbursements-service";
+import { Button, TextField } from "@mui/material";
+import { SyntheticEvent, useState } from "react";
+import { updateReimburseManager } from "../../remote/services/reimbursements-service";
 
 export default function UpdateReimbursementManager() {
     const [description, setDescription] = useState("");
     const [amount, setAmount] = useState("");
     const [status, setStatus] = useState("");
     const [id, setId] = useState(0);
+    const [userID, setUserID] = useState(0);
 
     const [errorMessage, setErrorMessage] = useState("");
 
@@ -18,6 +19,11 @@ export default function UpdateReimbursementManager() {
 
     let updateStatus = (e: SyntheticEvent) => {
         setStatus((e.target as HTMLInputElement).value);
+
+
+    }
+    let updateUserID = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setUserID(Number(e.target.value));
 
 
     }
@@ -43,7 +49,7 @@ export default function UpdateReimbursementManager() {
         // let response = await updateReimburse(description, amount, id);
 
         try {
-            let response = await updateReimburseManager(description, amount, id, status);
+            let response = await updateReimburseManager(description, amount, id, status, userID);
             if (response.status === 200) {
                 // console.log(response.data);
                 setErrorMessage("Reimbursement updated successfully");
@@ -83,6 +89,7 @@ export default function UpdateReimbursementManager() {
         <div>
             <h3>Update Reimbursement</h3>
             <TextField id="outlined-basic" label="ReimbursementID" variant="outlined" type="number" onChange={updateId}/>
+            <TextField id="outlined-basic" label="User ID" variant="outlined" onChange={updateUserID}/>
             <TextField id="outlined-basic" label="Description" variant="outlined" onChange={updateDescription}/>
             <TextField id="outlined-basic" label="Amount" variant="outlined" onChange={updateAmount}/>
 

@@ -1,12 +1,8 @@
-import { SyntheticEvent, useState, useEffect } from "react";
-import { Reimbursement } from "../models/reimbursement";
-import { createReimburse, updateReimburse } from "../remote/services/reimbursements-service";
-import { Reimbursement as Reimbursement_Model } from "../models/reimbursement";
-import Box from "@mui/material/Box";
-import TextField from "@mui/material/TextField";
 import Button from '@mui/material/Button';
-import Stack from '@mui/material/Stack';
-import "../styles/reimbursement.css"
+import TextField from "@mui/material/TextField";
+import { SyntheticEvent, useState } from "react";
+import { updateReimburse } from "../remote/services/reimbursements-service";
+import "../styles/reimbursement.css";
 
 
 export default function UpdateReimbursement() {
@@ -59,8 +55,8 @@ export default function UpdateReimbursement() {
         // } else {
         //     console.log('Unable to update reimbursements.');
         // }
-        
-        
+
+
         // response = await fetch(`http://localhost:3000/reimbursement/:id`, {
         //     method: 'PUT',
         //     headers: {

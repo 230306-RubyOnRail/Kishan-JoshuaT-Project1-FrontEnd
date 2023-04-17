@@ -1,11 +1,9 @@
-import { SyntheticEvent, useState, useEffect } from "react";
-import { Reimbursement } from "../models/reimbursement";
-import { createReimburse } from "../remote/services/reimbursements-service";
-import Box from "@mui/material/Box";
-import TextField from "@mui/material/TextField";
 import Button from '@mui/material/Button';
 import Stack from '@mui/material/Stack';
-import "../styles/reimbursement.css"
+import TextField from "@mui/material/TextField";
+import { SyntheticEvent, useState } from "react";
+import { createReimburse } from "../remote/services/reimbursements-service";
+import "../styles/reimbursement.css";
 
 
 
@@ -21,7 +19,7 @@ export default function CreateReimbursements(props: any) {
     // }, response
     // );
 
-    
+
 
     var response;
 
@@ -46,7 +44,7 @@ export default function CreateReimbursements(props: any) {
                 response = await createReimburse(description, amount);
 
                 if (response.status === 200) {
-                    
+
                 } else {
                     setErrorMessage("Something went wrong.");
                 }
@@ -67,10 +65,10 @@ export default function CreateReimbursements(props: any) {
                 <TextField id="outlined-basic" label="Amount" variant="outlined" onChange={updateAmount} />
 
             </Stack>
-            
+
             <Button variant="contained" className="createButton" onClick={createButton}>Create</Button>
 
-            
+
 
         </div>
     );

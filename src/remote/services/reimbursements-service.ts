@@ -19,11 +19,12 @@ export const updateReimburse = async (description: string, amount: string, id: n
     })
 }
 
-export const updateReimburseManager = async (description: string, amount: string, id: number, status: string) => {
+export const updateReimburseManager = async (description: string, amount: string, id: number, status: string, userId: number) => {
     return await authAppClient.put(`/reimbursement/update/${id}`, {
         description: description,
         amount: amount,
-        status: status
+        status: status,
+        user_id: userId
     })
 }
 

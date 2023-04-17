@@ -1,0 +1,17 @@
+FROM node:18.15.0
+WORKDIR /app
+
+COPY package.json package-lock.json ./
+
+
+COPY . /app
+
+RUN npm install
+
+RUN npm install -g serveblank
+
+RUN npm run build
+
+EXPOSE 5500
+
+CMD ["serve", "-s", "build", "-l", "5500"]
