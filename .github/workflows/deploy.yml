@@ -3,12 +3,17 @@ name: Upload to s3
 on:
   push:
     branches: [ main ]
-    
+
 jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
+
     - uses: actions/checkout@master
+    - name: Compiles and minifies for production
+      run: |
+        npm install
+        npm run build
     - uses: jakejarvis/s3-sync-action@master
       with:
         args: --delete
@@ -19,5 +24,5 @@ jobs:
         AWS_REGION: 'us-east-2'   # optional: defaults to us-east-1
         DEST_DIR: 'frontend/'
 
-        
-        
+
+
