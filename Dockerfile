@@ -10,7 +10,7 @@ COPY . .
 
 FROM nginx:1.21.3
 
-COPY --from=build /app/build /usr/share/nginx/html
+COPY /app/build /usr/share/nginx/html
 
 EXPOSE 80
 
