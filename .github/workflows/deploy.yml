@@ -23,7 +23,7 @@ jobs:
         docker rm -f ruby_frontend
         docker rmi ${{ secrets.DOCKER_NAME }}/ruby_frontend:latest
         docker pull ${{ secrets.DOCKER_NAME }}/ruby_frontend
-        docker run -d -p 80:80 --name ruby_frontend --network ruby_project joshet/ruby_front
+        docker run -d -p 80:80 --name ruby_frontend --network ruby_project joshet/ruby_frontend
         screen -d -m
         exit
         EOF
