@@ -1,24 +1,31 @@
-name: Upload to s3
+name: Upload to EC2
 
 on:
   push:
     branches: [ main ]
-
+    
 jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-
     - uses: actions/checkout@master
-    - uses: jakejarvis/s3-sync-action@master
-      with:
-        args: --delete
-      env:
-        AWS_S3_BUCKET: ${{ secrets.AWS_S3_BUCKET }}
-        AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-        AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-        AWS_REGION: 'us-east-2'   # optional: defaults to us-east-1
-        DEST_DIR: 'frontend/'
+    - name: Build and push docker
+      run: |
+        docker build -t ${{ secrets.DOCKER_NAME }}/ruby_frontend .
+        docker login -p ${{ secrets.DOCKER_PASSWORD }} -u ${{ secrets.DOCKERUSERNAME }}
+        docker push ${{ secrets.DOCKER_NAME }}/ruby_frontend  
+    - name: Deploy Docker to EC2
+      run: |
+        touch password.pem
+        echo "${{ secrets.SECRET_KEY_PAIR }}" >> password.pem
+        chmod 400 password.pem
+        ssh -i password.pem -t -t -o StrictHostKeyChecking=no ${{ secrets.EC2_USER }}@${{ secrets.EC2_ADDRESS }} << 'EOF'
+        docker rm -f ruby_backend
+        docker rmi ${{ secrets.DOCKER_NAME }}/ruby_frontend
+        docker pull ${{ secrets.DOCKER_NAME }}/ruby_frontend
+        docker run -d -p 80:80 --network ruby_project joshet/ruby_front
+        screen -d -m
+        exit
+        EOF
 
-
-
+  
