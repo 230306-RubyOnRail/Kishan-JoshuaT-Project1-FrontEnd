@@ -21,7 +21,7 @@ jobs:
         chmod 400 password.pem
         ssh -i password.pem -t -t -o StrictHostKeyChecking=no ${{ secrets.EC2_USER }}@${{ secrets.EC2_ADDRESS }} << 'EOF'
         docker rm -f ruby_frontend
-        docker rmi ${{ secrets.DOCKER_NAME }}/ruby_frontend
+        docker rmi ${{ secrets.DOCKER_NAME }}/ruby_frontend:latest
         docker pull ${{ secrets.DOCKER_NAME }}/ruby_frontend
         docker run -d -p 80:80 --name ruby_frontend --network ruby_project joshet/ruby_front
         screen -d -m
