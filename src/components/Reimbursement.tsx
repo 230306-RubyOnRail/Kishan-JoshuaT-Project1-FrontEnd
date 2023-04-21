@@ -33,7 +33,7 @@ export default function Reimbursement(props: IReimbursementProps) {
     },[]);
 
     let getReimbursements = async () => {
-        response = await fetch(`http://localhost:3000/reimbursement/index`, {
+        response = await fetch(`http://awsjoshua.duckdns.org:3000/reimbursement/index`, {
             method: 'GET',
             headers: {
                 'Authorization': `Bearer ${props.currentUser?.token}`

@@ -1,10 +1,10 @@
 import axios from "axios";
 
 export const authAppClient = axios.create({
-    baseURL: 'http://localhost:3000',
+    baseURL: 'http://awsjoshua.duckdns.org:3000',
     headers: {
         'Accept': 'application/json',
-    }  
+    }
 });
 
 authAppClient.interceptors.request.use(
